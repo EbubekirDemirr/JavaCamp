@@ -7,5 +7,5 @@ import JavaCamp.JavaProject.entities.concretes.Product;
 
 
 public interface ProductDao extends JpaRepository<Product, Integer>{
-
+	
 }

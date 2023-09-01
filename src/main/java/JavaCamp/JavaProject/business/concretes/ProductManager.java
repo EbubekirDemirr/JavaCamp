@@ -6,6 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import JavaCamp.JavaProject.business.abstracts.ProductService;
+import JavaCamp.JavaProject.core.utilities.results.DataResult;
+import JavaCamp.JavaProject.core.utilities.results.Result;
+import JavaCamp.JavaProject.core.utilities.results.SuccessDataResult;
+import JavaCamp.JavaProject.core.utilities.results.SuccessResult;
 import JavaCamp.JavaProject.dataaccess.abstracts.ProductDao;
 import JavaCamp.JavaProject.entities.concretes.Product;
 
@@ -21,9 +25,15 @@ public class ProductManager implements ProductService {
 	}
 
 	@Override
-	public List<Product> getAll() {
+	public DataResult<List<Product>> getAll() {
 		
-		return this.productDao.findAll();
+		return new SuccessDataResult<List<Product>>(this.productDao.findAll(), "Data Listelendi");
+	}
+
+	@Override
+	public Result add(Product product) {
+		this.productDao.save(product);
+		return new SuccessResult("ürün eklendi");
 	}
 
 }
